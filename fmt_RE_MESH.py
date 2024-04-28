@@ -25,7 +25,7 @@ bDD2Export					= True					#Enable or disable export of mesh.231011879 from the e
 
 
 #Mesh Global
-fDefaultMeshScale 			= 100.0 				#Override mesh scale (default is 1.0)
+fDefaultMeshScale 			= 1.0 				#Override mesh scale (default is 1.0)
 bMaterialsEnabled 			= True					#Load MDF Materials
 bRenderAsPoints 			= False					#Render mesh as points without triangles drawn (1 = on, 0 = off)
 bImportAllLODs 				= False					#Imports all LODGroups (as separate models)
@@ -4646,119 +4646,119 @@ def meshWriteModel(mdl, bs):
 		LOD1Offs = 176 if (sGameName == "DD2" or sGameName == "AJ_AAT") else 168 if isMeshVer3 else 128 if (sGameName == "RERT" or sGameName == "RE8" or sGameName == "MHRise") else 136
 		
 		#header:
-		bs.writeUInt(1213416781) #MESH
-		bs.writeUInt(formats[sGameName]["meshMagic"])
+		#bs.writeUInt(1213416781) #MESH
+		#bs.writeUInt(formats[sGameName]["meshMagic"])
 			
-		bs.writeUInt(0) #Filesize
-		bs.writeUInt(0) #LODGroupHash
+		#bs.writeUInt(0) #Filesize
+		#bs.writeUInt(0) #LODGroupHash
 		
-		if isMeshVer3:
-			bs.writeUByte(3) #flag
-			if sGameName == "DD2" or sGameName == "AJ_AAT":
-				bs.writeUByte(130) #solvedOffset
-				bs.writeUShort(84) #uknSF6
-			else:
-				bs.writeUByte(2) #solvedOffset
-				bs.writeUShort(0) #uknSF6
-			bs.writeUInt(len(mdl.bones) * bDoSkin + numMats) #Node Count
-			bs.writeUInt64(0) #ukn
-			bs.writeUInt64(LOD1Offs) #LODOffs
-			bs.writeUInt64(0) #ShadowLODOffs
-			bs.writeUInt64(0) #OccluderMeshOffs
-			bs.writeUInt64(0) #bsHeaderOffs
-			bs.writeUInt64(0) #ukn2
-			bs.writeUInt64(0) #vert_buffOffs
-			bs.writeUInt64(0) #normalsRecalcOffs
-			bs.writeUInt64(0) #groupPivotOffs      
-			bs.writeUInt64(0) #BBHeaderOffs
-			bs.writeUInt64(0) #bonesOffs
-			bs.writeUInt64(0) #matIndicesOffs
-			bs.writeUInt64(0) #boneIndicesOffs
-			bs.writeUInt64(0) #bsIndicesOffs
-			bs.writeUInt64(0) #ukn3
-			bs.writeUInt64(0) #namesOffs
-			bs.writeUInt64(0) #verticesOffset
-			bs.writeUInt64(0) #ukn4/padding
-			if sGameName == "DD2":
-				bs.writeUInt64(0) #ukn5/padding
+		#if isMeshVer3:
+			#bs.writeUByte(3) #flag
+			#if sGameName == "DD2" or sGameName == "AJ_AAT":
+				#bs.writeUByte(130) #solvedOffset
+				#bs.writeUShort(84) #uknSF6
+			#else:
+				#bs.writeUByte(2) #solvedOffset
+				#bs.writeUShort(0) #uknSF6
+			#bs.writeUInt(len(mdl.bones) * bDoSkin + numMats) #Node Count
+			#bs.writeUInt64(0) #ukn
+			#bs.writeUInt64(LOD1Offs) #LODOffs
+			#bs.writeUInt64(0) #ShadowLODOffs
+			#bs.writeUInt64(0) #OccluderMeshOffs
+			#bs.writeUInt64(0) #bsHeaderOffs
+			#bs.writeUInt64(0) #ukn2
+			#bs.writeUInt64(0) #vert_buffOffs
+			#bs.writeUInt64(0) #normalsRecalcOffs
+			#bs.writeUInt64(0) #groupPivotOffs      
+			#bs.writeUInt64(0) #BBHeaderOffs
+			#bs.writeUInt64(0) #bonesOffs
+			#bs.writeUInt64(0) #matIndicesOffs
+			#bs.writeUInt64(0) #boneIndicesOffs
+			#bs.writeUInt64(0) #bsIndicesOffs
+			#bs.writeUInt64(0) #ukn3
+			#bs.writeUInt64(0) #namesOffs
+			#bs.writeUInt64(0) #verticesOffset
+			#bs.writeUInt64(0) #ukn4/padding
+			#if sGameName == "DD2":
+				#bs.writeUInt64(0) #ukn5/padding
 			
-		else:
-			bs.writeUShort(3) #flag
-			bs.writeUShort(len(mdl.bones) * bDoSkin + numMats) #Node Count
-			bs.writeUInt(0) #LODGroupHash
-			bs.writeUInt64(LOD1Offs) #LODs address
-			bs.writeUInt64(0) #Shadow LODs address
-			bs.writeUInt64(0) #occluderMeshOffs
-			bs.writeUInt64(0) #Bones Address
-			bs.writeUInt64(0) #Normal Recalculation Address
-			bs.writeUInt64(0) #Blendshapes Header Address
-			bs.writeUInt64(0) #Floats Header Address
-			bs.writeUInt64(0) #Vertex Buffer Headers Address
-			bs.writeUInt64(0)
-			bs.writeUInt64(0) #Material Indices Table Address
-			bs.writeUInt64(0) #Bones Indices Table Address
-			bs.writeUInt64(0) #Blendshapes Indices Table Address
-			bs.writeUInt64(0) #Names Address
-			if sGameName == "RE2" or sGameName == "RE3" or sGameName == "DMC5":
-				bs.writeUInt64(0)
+		#else:
+			#bs.writeUShort(3) #flag
+			#bs.writeUShort(len(mdl.bones) * bDoSkin + numMats) #Node Count
+			#bs.writeUInt(0) #LODGroupHash
+			#bs.writeUInt64(LOD1Offs) #LODs address
+			#bs.writeUInt64(0) #Shadow LODs address
+			#bs.writeUInt64(0) #occluderMeshOffs
+			#bs.writeUInt64(0) #Bones Address
+			#bs.writeUInt64(0) #Normal Recalculation Address
+			#bs.writeUInt64(0) #Blendshapes Header Address
+			#bs.writeUInt64(0) #Floats Header Address
+			#bs.writeUInt64(0) #Vertex Buffer Headers Address
+			#bs.writeUInt64(0)
+			#bs.writeUInt64(0) #Material Indices Table Address
+			#bs.writeUInt64(0) #Bones Indices Table Address
+			#bs.writeUInt64(0) #Blendshapes Indices Table Address
+			#bs.writeUInt64(0) #Names Address
+			#if sGameName == "RE2" or sGameName == "RE3" or sGameName == "DMC5":
+				#bs.writeUInt64(0)
 		
 		#LODs:
-		bs.writeByte(1) #set to one LODGroup
-		bs.writeByte(len(newMaterialNames)) #mat count
-		bs.writeByte(2) #set to 2 UV channels
-		bs.writeByte(1) #unknown
-		bs.writeUInt(len(submeshes)) #total mesh count
+		#bs.writeByte(1) #set to one LODGroup
+		#bs.writeByte(len(newMaterialNames)) #mat count
+		#bs.writeByte(2) #set to 2 UV channels
+		#bs.writeByte(1) #unknown
+		#bs.writeUInt(len(submeshes)) #total mesh count
 		
-		if BBskipBytes==8:
-			bs.writeUInt64(0)
+		#if BBskipBytes==8:
+			#bs.writeUInt64(0)
 		
-		for i in range(6):
-			bs.writeUInt64(0) #main bounding sphere+box placeholder
+		#for i in range(6):
+			#bs.writeUInt64(0) #main bounding sphere+box placeholder
 		
-		bs.writeUInt64(bs.tell()+8) #offset to LODOffsets
+		#bs.writeUInt64(bs.tell()+8) #offset to LODOffsets
 		
-		if (bs.tell()+8) % 16 != 0:
-			bs.writeUInt64(bs.tell()+16) #first (and only) LODOffset
-		else:
-			bs.writeUInt64(bs.tell()+8)
+		#if (bs.tell()+8) % 16 != 0:
+			#bs.writeUInt64(bs.tell()+16) #first (and only) LODOffset
+		#else:
+			#bs.writeUInt64(bs.tell()+8)
 		padToNextLine(bs)
 			
 		#Write LODGroup:
-		bs.writeUInt(len(newMainMeshes))
+		#bs.writeUInt(len(newMainMeshes))
 		LODDist = openOptionsDialog.LODDist if openOptionsDialog else 0.02667995
-		bs.writeFloat(LODDist) #unknown, maybe LOD distance change
-		bs.writeUInt64(bs.tell()+8) #Mainmeshes offset
+		#bs.writeFloat(LODDist) #unknown, maybe LOD distance change
+		#bs.writeUInt64(bs.tell()+8) #Mainmeshes offset
 		
 		newMainMeshesOffset = bs.tell()
-		for i in range(len(newMainMeshes)):
-			bs.writeUInt64(0)
+		#for i in range(len(newMainMeshes)):
+			#bs.writeUInt64(0)
 		
-		while(bs.tell() % 16 != 0):
-			bs.writeByte(0)
+		#while(bs.tell() % 16 != 0):
+			#bs.writeByte(0)
 
 		#write new MainMeshes:
 		for i, mm in enumerate(newMainMeshes):
 			
 			newMMOffset = bs.tell()
-			bs.writeByte(mm[len(mm)-1]) #Group ID
-			bs.writeByte(len(mm[0])) #Submesh count
-			bs.writeShort(0)
-			bs.writeInt(0)
-			bs.writeUInt(mm[1]) #MainMesh index count
-			bs.writeUInt(mm[2]) #MainMesh vertex count
+			#bs.writeByte(mm[len(mm)-1]) #Group ID
+			#bs.writeByte(len(mm[0])) #Submesh count
+			#bs.writeShort(0)
+			#bs.writeInt(0)
+			#bs.writeUInt(mm[1]) #MainMesh index count
+			#bs.writeUInt(mm[2]) #MainMesh vertex count
 			meshVertexInfo.append([i, len(mm[0]), 0, 0, mm[1], mm[2]])
 			
-			for j, submesh in enumerate(mm[0]):
+			#for j, submesh in enumerate(mm[0]):
 				#print ("New mainmesh GroupID", mm[len(mm)-1], "submesh", j)
-				bs.writeUInt(submesh[0])
-				bs.writeUInt(submesh[1])
-				bs.writeUInt(submesh[2])
-				bs.writeUInt(submesh[3])
-				if sGameName != "RE7" and sGameName != "RE2" and sGameName != "RE3" and sGameName != "DMC5":
-					bs.writeUInt64(0)
+				#bs.writeUInt(submesh[0])
+				#bs.writeUInt(submesh[1])
+				#bs.writeUInt(submesh[2])
+				#bs.writeUInt(submesh[3])
+				#if sGameName != "RE7" and sGameName != "RE2" and sGameName != "RE3" and sGameName != "DMC5":
+					#bs.writeUInt64(0)
 			pos = bs.tell()
 			bs.seek(newMainMeshesOffset + i * 8)
-			bs.writeUInt64(newMMOffset)
+			#bs.writeUInt64(newMMOffset)
 			meshOffsets.append(newMMOffset)
 			bs.seek(pos)
 		
@@ -4769,7 +4769,7 @@ def meshWriteModel(mdl, bs):
 		else:
 			bs.seek(nodesIndicesOffsLocation) #to material indices offset instead
 			
-		bs.writeUInt64(bonesOffs)
+		#bs.writeUInt64(bonesOffs)
 		bs.seek(bonesOffs)
 		mainmeshCount = len(newMainMeshes)
 		
@@ -4789,24 +4789,24 @@ def meshWriteModel(mdl, bs):
 			else:
 				boneMapLength = maxBoneMapLength if len(mdl.bones) > maxBoneMapLength else len(mdl.bones)
 
-			if not bReWrite:
-				bs.writeBytes(f.readBytes(bonesOffs)) #to bone name start
+			#if not bReWrite:
+				#bs.writeBytes(f.readBytes(bonesOffs)) #to bone name start
 		
 			#write new skeleton header
-			bs.writeUInt(len(mdl.bones)) #bone count
-			bs.writeUInt(boneMapLength)  #bone map count
+			#bs.writeUInt(len(mdl.bones)) #bone count
+			#bs.writeUInt(boneMapLength)  #bone map count
 
-			for b in range(5): 
-				bs.writeUInt64(0)
+			#for b in range(5): 
+				#bs.writeUInt64(0)
 			
 			#write skin bone map:
 			if bAddNumbers and len(newSkinBoneMap) > 0:
-				for i in range(len(newSkinBoneMap)):
-					bs.writeUShort(newSkinBoneMap[i])
+				#for i in range(len(newSkinBoneMap)):
+					#bs.writeUShort(newSkinBoneMap[i])
 				boneRemapTable = newSkinBoneMap
 			else:
 				for i in range(boneMapLength): 
-					bs.writeUShort(i)
+					#bs.writeUShort(i)
 					boneRemapTable.append(i)
 			padToNextLine(bs)
 			
@@ -4816,20 +4816,20 @@ def meshWriteModel(mdl, bs):
 			#write hierarchy
 			newHierarchyOffs = bs.tell()
 			for i, bone in enumerate(mdl.bones):
-				bs.writeUShort(i) # bone index
-				bs.writeUShort(bone.parentIndex)
+				#bs.writeUShort(i) # bone index
+				#bs.writeUShort(bone.parentIndex)
 				nextSiblingIdx = -1
 				for j, bn in enumerate(mdl.bones):
 					if i < j and bone != bn and bone.parentIndex == bn.parentIndex:
 						nextSiblingIdx = j
 						break
-				bs.writeUShort(nextSiblingIdx)
+				#bs.writeUShort(nextSiblingIdx)
 				nextChildIdx = -1
 				for j, bn in enumerate(mdl.bones):
 					if bn.parentIndex == i:
 						nextChildIdx = j
 						break
-				bs.writeUShort(nextChildIdx)
+				#bs.writeUShort(nextChildIdx)
 				cousinIdx = -1
 				cousinBoneName = ""
 				bnName = bonesList[i].lower()
@@ -4847,7 +4847,7 @@ def meshWriteModel(mdl, bs):
 						if bonesList[j].lower() == cousinBoneName:
 							cousinIdx = j
 							break
-				bs.writeUShort(cousinIdx)
+				#bs.writeUShort(cousinIdx)
 				padToNextLine(bs)
 		
 			#prepare transform data:
@@ -4869,18 +4869,18 @@ def meshWriteModel(mdl, bs):
 			
 			#write local bone transforms:
 			newLocalOffs = bs.tell()
-			for i in range(len(localTransforms)):
-				bs.writeBytes(localTransforms[i].toBytes())
+			#for i in range(len(localTransforms)):
+				#bs.writeBytes(localTransforms[i].toBytes())
 			
 			#write global bone transforms:
 			newGlobalOffs = bs.tell()
-			for i in range(len(globalTransforms)):
-				bs.writeBytes(globalTransforms[i].toBytes())
+			#for i in range(len(globalTransforms)):
+				#bs.writeBytes(globalTransforms[i].toBytes())
 			
 			#write inverse global bone transforms:
 			newInvGlobOffs = bs.tell()
-			for i in range(len(globalTransforms)):
-				bs.writeBytes(globalTransforms[i].inverse().toBytes())
+			#for i in range(len(globalTransforms)):
+				#bs.writeBytes(globalTransforms[i].inverse().toBytes())
 		
 		#collect material names:
 		materialNames = []
@@ -4895,10 +4895,10 @@ def meshWriteModel(mdl, bs):
 		newMatIndicesOffs = bs.tell()
 		for i in range(numMats): 
 			if bReWrite:
-				bs.writeUShort(i)
-			else:
+				#bs.writeUShort(i)
+			#else:
 				f.seek(nodesIndicesOffs + i * 2)
-				bs.writeUShort(f.readUShort())
+				#bs.writeUShort(f.readUShort())
 		padToNextLine(bs)
 		
 		if bDoSkin:
@@ -4906,7 +4906,7 @@ def meshWriteModel(mdl, bs):
 			#write bone map indices:
 			newBoneMapIndicesOffs = bs.tell()
 			for i in range(len(mdl.bones)): 
-				bs.writeUShort(numMats + i)
+				#bs.writeUShort(numMats + i)
 				boneInds.append(numMats + i)
 			padToNextLine(bs)
 		
@@ -4917,23 +4917,23 @@ def meshWriteModel(mdl, bs):
 			nameStringsOffs += 1
 		
 		for i in range(numMats): 
-			bs.writeUInt64(nameStringsOffs)
+			#bs.writeUInt64(nameStringsOffs)
 			nameStringsOffs += len(materialNames[i]) + 1
 			
 		if bDoSkin:
 			for i in range(len(mdl.bones)): 
-				bs.writeUInt64(nameStringsOffs)
+				#bs.writeUInt64(nameStringsOffs)
 				nameStringsOffs += len(bonesList[i]) + 1
 		padToNextLine(bs)
 		
 		names = []
 		#write name strings
 		for i in range(len(materialNames)):
-			bs.writeString(materialNames[i])
+			#bs.writeString(materialNames[i])
 			names.append(materialNames[i])
 		if bDoSkin:
 			for i in range(len(bonesList)): 
-				bs.writeString(bonesList[i])
+				#bs.writeString(bonesList[i])
 				names.append(bonesList[i])
 		padToNextLine(bs)
 		
@@ -4941,49 +4941,49 @@ def meshWriteModel(mdl, bs):
 			#Write unknown DD2 hashes
 			if isDD2Mesh:
 				DD2HashesOffset = bs.tell()
-				bs.writeUInt(2745047434)
-				for i in range(mainmeshCount - 1):
-					bs.writeUInt(0)
+				#bs.writeUInt(2745047434)
+				#for i in range(mainmeshCount - 1):
+					#bs.writeUInt(0)
 				padToNextLine(bs)
 		
 			#write bounding boxes
 			newBBOffs = bs.tell()
-			bs.writeUInt64(len(newSkinBoneMap))
-			bs.writeUInt64(bs.tell() + 8)
-			for i in range(len(newSkinBoneMap)):
-				for j in range(3): bs.writeFloat(-BoundingBoxSize)
-				bs.writeFloat(1)
-				for j in range(3): bs.writeFloat(BoundingBoxSize)
-				bs.writeFloat(1)
+			#bs.writeUInt64(len(newSkinBoneMap))
+			#bs.writeUInt64(bs.tell() + 8)
+			#for i in range(len(newSkinBoneMap)):
+				#for j in range(3): #bs.writeFloat(-BoundingBoxSize)
+				#bs.writeFloat(1)
+				#for j in range(3): #bs.writeFloat(BoundingBoxSize)
+				#bs.writeFloat(1)
 			newVertBuffHdrOffs = bs.tell()
 			
 			#fix bones header
 			bs.seek(bonesOffs + 16)
-			bs.writeUInt64(newHierarchyOffs)
-			bs.writeUInt64(newLocalOffs)
-			bs.writeUInt64(newGlobalOffs)
-			bs.writeUInt64(newInvGlobOffs)
+			#bs.writeUInt64(newHierarchyOffs)
+			#bs.writeUInt64(newLocalOffs)
+			#bs.writeUInt64(newGlobalOffs)
+			#bs.writeUInt64(newInvGlobOffs)
 		else:
 			newVertBuffHdrOffs = bs.tell()
 		
 		#fix main header
 		bs.seek(numNodesLocation)
-		bs.writeUShort(numMats + len(mdl.bones) * bDoSkin) #numNodes
+		#bs.writeUShort(numMats + len(mdl.bones) * bDoSkin) #numNodes
 			
 		if bDoSkin:
 			bs.seek(floatsHdrOffsLocation)
-			bs.writeUInt64(newBBOffs)
+			#bs.writeUInt64(newBBOffs)
 			bs.seek(vBuffHdrOffsLocation)
-			bs.writeUInt64(newVertBuffHdrOffs)
+			#bs.writeUInt64(newVertBuffHdrOffs)
 			bs.seek(nodesIndicesOffsLocation)
-			bs.writeUInt64(newMatIndicesOffs)
-			bs.writeUInt64(newBoneMapIndicesOffs)
+			#bs.writeUInt64(newMatIndicesOffs)
+			#bs.writeUInt64(newBoneMapIndicesOffs)
 		else:
 			bs.seek(vBuffHdrOffsLocation)
-			bs.writeUInt64(newVertBuffHdrOffs)
+			#bs.writeUInt64(newVertBuffHdrOffs)
 		bs.seek(namesOffsLocation)
 		print(newNamesOffs)
-		bs.writeUInt64(newNamesOffs)
+		#bs.writeUInt64(newNamesOffs)
 		
 		#fix vertexBufferHeader
 		bs.seek(newVertBuffHdrOffs)
@@ -4991,36 +4991,36 @@ def meshWriteModel(mdl, bs):
 		SF6SkipBytes = 0 if not isMeshVer3 else 32
 		newVertBuffOffs = newVertBuffHdrOffs + 72 + SF6SkipBytes + 8*bDoSkin + 8*bDoUV2 + 8*bDoColors + 2*RERTBytes
 		
-		bs.writeUInt64(bs.tell() + 48 + SF6SkipBytes + 2*RERTBytes)
-		bs.writeUInt64(newVertBuffOffs)
+		#bs.writeUInt64(bs.tell() + 48 + SF6SkipBytes + 2*RERTBytes)
+		#bs.writeUInt64(newVertBuffOffs)
 		
-		if sGameName == "RERT":
-			bs.writeUInt64(0)
-		bs.writeUInt64(0)
-		bs.writeUInt64(0)
-		bs.writeShort(vertElemCount)
-		bs.writeShort(vertElemCount)
-		bs.writeUInt64(0)
-		bs.writeInt(-newVertBuffOffs)
+		#if sGameName == "RERT":
+			#bs.writeUInt64(0)
+		#bs.writeUInt64(0)
+		#bs.writeUInt64(0)
+		#bs.writeShort(vertElemCount)
+		#bs.writeShort(vertElemCount)
+		#bs.writeUInt64(0)
+		#bs.writeInt(-newVertBuffOffs)
 		
-		if isMeshVer3:
-			for i in range(4):
-				bs.writeUInt64(0)
-		if sGameName == "RERT": # and (bs.tell() % 8) != 0:
-			bs.writeUInt64(0)
+		#if isMeshVer3:
+			#for i in range(4):
+				#bs.writeUInt64(0)
+		#if sGameName == "RERT": # and (bs.tell() % 8) != 0:
+			#bs.writeUInt64(0)
 		
-		bs.writeUInt64(786432) #positions VertElemHeader
-		bs.writeUInt64(524289) #normal VertElemHeader
-		bs.writeUInt64(262146) #UV0 VertElemHeader
-		if bDoUV2:
-			bs.writeUInt64(262147) #UV2 VertElemHeader
-		if bDoSkin:
-			bs.writeUInt64(1048580) #Skin VertElemHeader
-		if bDoColors:
-			bs.writeUInt64(262149) #Colors VertElemHeader
+		#bs.writeUInt64(786432) #positions VertElemHeader
+		#bs.writeUInt64(524289) #normal VertElemHeader
+		#bs.writeUInt64(262146) #UV0 VertElemHeader
+		#if bDoUV2:
+			#bs.writeUInt64(262147) #UV2 VertElemHeader
+		#if bDoSkin:
+			#bs.writeUInt64(1048580) #Skin VertElemHeader
+		#if bDoColors:
+			#bs.writeUInt64(262149) #Colors VertElemHeader
 			
 	elif not bReWrite:
-		bs.writeBytes(f.readBytes(vertBuffOffs)) #copy to vertex buffer header
+		#bs.writeBytes(f.readBytes(vertBuffOffs)) #copy to vertex buffer header
 		newVertBuffHdrOffs = bs.tell()
 
 	
@@ -5037,8 +5037,21 @@ def meshWriteModel(mdl, bs):
 			mesh.positions = mesh.morphList[0].positions
 
 	#Write vertex data
+	groupno = -1
+	counter = 1
 	vertexPosStart = bs.tell()
 	for mesh in submeshes:
+		ss = mesh.name.lower().split('_')
+		#if int(ss[3]) == groupno and groupno > -1:
+			#if counter % 2 == 0:
+			#if counter > 1 and counter < 6:
+			#if counter == 2: #crappy fix for tops051
+			#for x in range(5): #4 times if manually editing hex
+			#byte_array = [counter]
+			#some_bytes = b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a' + bytearray(byte_array)
+			#bs.writeBytes(some_bytes)
+		groupno = int(ss[3])
+		counter = counter + 1
 		submeshVertexStride.append(vertexStrideStart)
 		for vcmp in mesh.positions:
 			bs.writeBytes((vcmp * newScale).toBytes())
@@ -5054,41 +5067,42 @@ def meshWriteModel(mdl, bs):
 	normalTangentStart = bs.tell()	
 	for m, mesh in enumerate(submeshes):
 		for v, vcmp in enumerate(mesh.tangents):
-			bs.writeByte(int(vcmp[0][0] * 127 + 0.5000000001)) #normal
-			bs.writeByte(int(vcmp[0][1] * 127 + 0.5000000001))
-			bs.writeByte(int(vcmp[0][2] * 127 + 0.5000000001))
-			bs.writeByte(0)
-			bs.writeByte(int(vcmp[2][0] * 127 + 0.5000000001)) #bitangent
-			bs.writeByte(int(vcmp[2][1] * 127 + 0.5000000001))
-			bs.writeByte(int(vcmp[2][2] * 127 + 0.5000000001))
+			#bs.writeByte(int(vcmp[0][0] * 127 + 0.5000000001)) #normal
+			#bs.writeByte(int(vcmp[0][1] * 127 + 0.5000000001))
+			#bs.writeByte(int(vcmp[0][2] * 127 + 0.5000000001))
+			#bs.writeByte(0)
+			#bs.writeByte(int(vcmp[2][0] * 127 + 0.5000000001)) #bitangent
+			#bs.writeByte(int(vcmp[2][1] * 127 + 0.5000000001))
+			#bs.writeByte(int(vcmp[2][2] * 127 + 0.5000000001))
 			TNW = dot(cross(vcmp[0], vcmp[1]), vcmp[2])
-			if (TNW < 0.0): #default way
-				bs.writeByte(w1)
-			else:
-				bs.writeByte(w2)
+			#if (TNW < 0.0): #default way
+				#bs.writeByte(w1)
+			#else:
+				#bs.writeByte(w2)
 				
 	UV0start = bs.tell()
-	for mesh in submeshes:
-		for vcmp in mesh.uvs:
-			bs.writeHalfFloat(vcmp[0])
-			bs.writeHalfFloat(vcmp[1])
+	#for mesh in submeshes:
+		#for vcmp in mesh.uvs:
+			#bs.writeHalfFloat(vcmp[0])
+			#bs.writeHalfFloat(vcmp[1])
 				
 	UV1start = bs.tell()
 	if bDoUV2:
 		for mesh in submeshes:
 			if len(mesh.lmUVs) != len(mesh.positions):
 				mesh.lmUVs = mesh.uvs
-			for vcmp in mesh.lmUVs:
-				bs.writeHalfFloat(vcmp[0])
-				bs.writeHalfFloat(vcmp[1])
+			#for vcmp in mesh.lmUVs:
+				#bs.writeHalfFloat(vcmp[0])
+				#bs.writeHalfFloat(vcmp[1])
 
 	def writeBoneID(bID, i):
-		if sGameName == "SF6":
-			if i==3:
-				bs.writeBits(0, 2)
-			bs.writeBits(bID, 10)
-		else:
-			bs.writeUByte(bID)
+		print('skipping stuff...')
+		#if sGameName == "SF6":
+			#if i==3:
+				#bs.writeBits(0, 2)
+			#bs.writeBits(bID, 10)
+		#else:
+			#bs.writeUByte(bID)
 	
 	boneIdMax = 6 if sGameName == "SF6" else 8
 	bnWeightStart = bs.tell()
@@ -5096,9 +5110,9 @@ def meshWriteModel(mdl, bs):
 	if bDoSkin:
 		for m, mesh in enumerate(submeshes):
 			pos = bs.tell()
-			for vcmp in mesh.weights: #write 0's
-				for i in range(4):
-					bs.writeFloat(0)
+			#for vcmp in mesh.weights: #write 0's
+				#for i in range(4):
+					#bs.writeFloat(0)
 			bs.seek(pos)
 			
 			for i, vcmp in enumerate(mesh.weights): #write bone indices & weights over 0's
@@ -5154,10 +5168,10 @@ def meshWriteModel(mdl, bs):
 				for x in range(len(tupleList), 8):
 					writeBoneID(lastBone, x)
 				
-				bs.seek(pos+8)
-				for wval in range(len(tupleList)):
-					bs.writeUByte(tupleList[wval][0])
-				bs.seek(pos+16)
+#				bs.seek(pos+8)
+				#for wval in range(len(tupleList)):
+					#bs.writeUByte(tupleList[wval][0])
+#				bs.seek(pos+16)
 							
 	colorsStart = bs.tell()
 	if bDoColors:
@@ -5167,10 +5181,10 @@ def meshWriteModel(mdl, bs):
 					RGBA = mesh.colors[p] if p < len(mesh.colors) else NoeVec4((1.0, 1.0, 1.0, 1.0))
 					for c in range(4): 
 						color = RGBA[c] if c < len(RGBA) else 1.0
-						bs.writeUByte(int(color * 255 + 0.5))
-			else:
-				for p, pos in enumerate(mesh.positions):
-					bs.writeInt(-1)
+						#bs.writeUByte(int(color * 255 + 0.5))
+			#else:
+				#for p, pos in enumerate(mesh.positions):
+					#bs.writeInt(-1)
 	
 	vertexDataEnd = bs.tell()
 	
@@ -5179,10 +5193,10 @@ def meshWriteModel(mdl, bs):
 		submeshFaceStride.append(faceStart - vertexDataEnd)
 		submeshFaceCount.append(len(mesh.indices))
 		submeshFaceSize.append(len(mesh.indices))
-		for idx in mesh.indices:
-			bs.writeUShort(idx)
-		if ((bs.tell() - faceStart) / 6) % 2 != 0: #padding
-			bs.writeUShort(0)
+		#for idx in mesh.indices:
+			#bs.writeUShort(idx)
+		#if ((bs.tell() - faceStart) / 6) % 2 != 0: #padding
+			#bs.writeUShort(0)
 	faceDataEnd = bs.tell()
 	
 	#update mainmesh and submesh headers
@@ -5191,81 +5205,81 @@ def meshWriteModel(mdl, bs):
 		for mmc in range(mainmeshCount):
 			mainmeshVertexCount = 0
 			mainmeshFaceCount = 0
-			bs.seek(meshOffsets[mmc] + 16)
+#			bs.seek(meshOffsets[mmc] + 16)
 			
 			for smc in range(meshVertexInfo[mmc][1]):
-				bs.seek(4, 1)
-				bs.writeUInt(submeshFaceCount[loopSubmeshCount])
-				bs.writeUInt(int(submeshFaceStride[loopSubmeshCount] / 2))
-				bs.writeUInt(submeshVertexStride[loopSubmeshCount])
-				if formats[sGameName]["meshVersion"] >= 3 or sGameName == "RERT" or sGameName == "ReVerse" or sGameName == "MHRise" or sGameName == "RE8" or sGameName == "SF6" or sGameName == "RE4":
-					bs.seek(8, 1)
+#				bs.seek(4, 1)
+				#bs.writeUInt(submeshFaceCount[loopSubmeshCount])
+				#bs.writeUInt(int(submeshFaceStride[loopSubmeshCount] / 2))
+				#bs.writeUInt(submeshVertexStride[loopSubmeshCount])
+#				if formats[sGameName]["meshVersion"] >= 3 or sGameName == "RERT" or sGameName == "ReVerse" or sGameName == "MHRise" or sGameName == "RE8" or sGameName == "SF6" or sGameName == "RE4":
+#					bs.seek(8, 1)
 				mainmeshVertexCount += submeshVertexCount[loopSubmeshCount]
 				mainmeshFaceCount += submeshFaceSize[loopSubmeshCount]
 				loopSubmeshCount += 1
-			bs.seek(meshOffsets[mmc]+8)
-			bs.writeUInt(mainmeshVertexCount)
-			bs.writeUInt(mainmeshFaceCount)
+#			bs.seek(meshOffsets[mmc]+8)
+			#bs.writeUInt(mainmeshVertexCount)
+			#bs.writeUInt(mainmeshFaceCount)
 		
 	#Fix vertex buffer header:
 	skipAmt = 16 if not isMeshVer3 else 24
 	fcBuffSize = faceDataEnd - vertexDataEnd
-	if bReWrite or bWriteBones:
-		bs.seek(newVertBuffHdrOffs+skipAmt) 
-	else: 
-		bs.seek(vBuffHdrOffs+skipAmt)
+#	if bReWrite or bWriteBones:
+#		bs.seek(newVertBuffHdrOffs+skipAmt) 
+#	else: 
+#		bs.seek(vBuffHdrOffs+skipAmt)
 	
 	if isMeshVer3:
 		facesDiff = (80 + 8*vertElemCountB if bWriteBones else 0) if not bReWrite else (80 + 8*vertElemCount)
-		bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size
+		#bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size
 		#print("faces offset", bs.tell(), vertexDataEnd, newVertBuffHdrOffs, facesDiff, vertexDataEnd - newVertBuffHdrOffs - facesDiff)
-		bs.writeUInt(vertexDataEnd - newVertBuffHdrOffs - facesDiff) #face buffer offset
-		bs.seek(4,1) #element counts
-		bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size2
-		bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size3
-		bs.writeInt(-(vertexPosStart))
-		bs.seek(32, 1)
-	else:
-		bs.writeUInt64(vertexDataEnd) #face buffer offset
-		bs.seek(RERTBytes, 1)
-		bs.writeUInt(vertexDataEnd - vertexPosStart) #vertex buffer size
-		bs.writeUInt(fcBuffSize) #face buffer size
-		bs.seek(4,1) #element counts
-		bs.writeUInt64(fcBuffSize)
-		bs.writeInt(-(vertexPosStart))
+		#bs.writeUInt(vertexDataEnd - newVertBuffHdrOffs - facesDiff) #face buffer offset
+#		bs.seek(4,1) #element counts
+		#bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size2
+		#bs.writeUInt(faceDataEnd - vertexPosStart) #total buffer size3
+		#bs.writeInt(-(vertexPosStart))
+#		bs.seek(32, 1)
+#	else:
+		#bs.writeUInt64(vertexDataEnd) #face buffer offset
+#		bs.seek(RERTBytes, 1)
+		#bs.writeUInt(vertexDataEnd - vertexPosStart) #vertex buffer size
+		#bs.writeUInt(fcBuffSize) #face buffer size
+#		bs.seek(4,1) #element counts
+		#bs.writeUInt64(fcBuffSize)
+		#bs.writeInt(-(vertexPosStart))
 	
-	if bReWrite:
-		bs.seek(newVertBuffHdrOffs + 48 + SF6SkipBytes + (RERTBytes * 2))
-	else:
-		bs.seek(RERTBytes, 1)
+#	if bReWrite:
+#		bs.seek(newVertBuffHdrOffs + 48 + SF6SkipBytes + (RERTBytes * 2))
+#	else:
+#		bs.seek(RERTBytes, 1)
 	
 	vertElemHdrStart = bs.tell()
 	
 	for i in range (vertElemCount):
 		elementType = bs.readUShort()
 		elementSize = bs.readUShort()
-		if elementType == 0:
-			bs.writeUInt(vertexPosStart - vertexPosStart)
-		elif elementType == 1:
-			bs.writeUInt(normalTangentStart - vertexPosStart)
-		elif elementType == 2:
-			bs.writeUInt(UV0start - vertexPosStart)
-		elif elementType == 3:
-			bs.writeUInt(UV1start - vertexPosStart)
-		elif elementType == 4:
-			bs.writeUInt(bnWeightStart - vertexPosStart)
-		elif elementType == 5:
-			bs.writeUInt(colorsStart - vertexPosStart) 
+		#if elementType == 0:
+			#bs.writeUInt(vertexPosStart - vertexPosStart)
+		#elif elementType == 1:
+			#bs.writeUInt(normalTangentStart - vertexPosStart)
+		#elif elementType == 2:
+			#bs.writeUInt(UV0start - vertexPosStart)
+		#elif elementType == 3:
+			#bs.writeUInt(UV1start - vertexPosStart)
+		#elif elementType == 4:
+			#bs.writeUInt(bnWeightStart - vertexPosStart)
+		#elif elementType == 5:
+			#bs.writeUInt(colorsStart - vertexPosStart) 
 	
 	if isMeshVer3: 
 		DD2amt = 8 if isDD2Mesh else 0
-		bs.seek(136 + int(DD2amt * 2))
-		bs.writeUInt64(vertElemHdrStart-16) #fix ukn3
-		bs.seek(152 + DD2amt)
-		bs.writeUInt64(vertexPosStart) #fix Vertices offset
-		if isDD2Mesh:
-			bs.seek(144)
-			bs.writeUInt64(DD2HashesOffset)
+#		bs.seek(136 + int(DD2amt * 2))
+		#bs.writeUInt64(vertElemHdrStart-16) #fix ukn3
+#		bs.seek(152 + DD2amt)
+		#bs.writeUInt64(vertexPosStart) #fix Vertices offset
+#		if isDD2Mesh:
+#			bs.seek(144)
+			#bs.writeUInt64(DD2HashesOffset)
 	
 	#fix main bounding box:
 	bs.seek(LOD1Offs+8+BBskipBytes)
@@ -5279,13 +5293,13 @@ def meshWriteModel(mdl, bs):
 			if distToCenter > sphereRadius: 
 				sphereRadius = distToCenter
 				
-	bs.writeBytes((BBcenter * newScale).toBytes()) #Bounding Sphere
-	bs.writeFloat(sphereRadius * newScale) #Bounding Sphere radius
-	bs.writeBytes((min * newScale).toBytes()) #BBox min
-	bs.writeBytes((max * newScale).toBytes()) #BBox max
-	if isMeshVer3:
-		bs.seek(-20,1); bs.writeUInt(1)
-		bs.seek(12,1); bs.writeUInt(1)
+	#bs.writeBytes((BBcenter * newScale).toBytes()) #Bounding Sphere
+	#bs.writeFloat(sphereRadius * newScale) #Bounding Sphere radius
+	#bs.writeBytes((min * newScale).toBytes()) #BBox min
+	#bs.writeBytes((max * newScale).toBytes()) #BBox max
+#	if isMeshVer3:
+#		bs.seek(-20,1); #bs.writeUInt(1)
+#		bs.seek(12,1); #bs.writeUInt(1)
 	
 	#fix skeleton bounding boxes:
 	if bDoSkin and bCalculateBoundingBoxes:
@@ -5298,32 +5312,32 @@ def meshWriteModel(mdl, bs):
 				pos = mdl.bones[newSkinBoneMap[remappedBoneIdx]].getMatrix()[3]
 			except:
 				continue
-			bs.seek(newBBOffs+16+remappedBoneIdx*32) 
+#			bs.seek(newBBOffs+16+remappedBoneIdx*32) 
 			boneWeightBBs[idx] = [(box[0]-pos[0])*newScale, (box[1]-pos[1])*newScale, (box[2]-pos[2])*newScale, 1.0, (box[3]-pos[0])*newScale, (box[4]-pos[1])*newScale, (box[5]-pos[2])*newScale, 1.0]
 			box = boneWeightBBs[idx]
-			for coord in box:
-				bs.writeFloat(coord)
+			#for coord in box:
+				#bs.writeFloat(coord)
 	
 	#set to only one LODGroup
-	bs.seek(LOD1Offs)
-	bs.writeByte(1)
+	#bs.seek(LOD1Offs)
+	#bs.writeByte(1)
 	
 	#disable shadow LODs
-	bs.seek(LOD1OffsetLocation+8)
-	bs.writeUInt(0)
+#	bs.seek(LOD1OffsetLocation+8)
+	#bs.writeUInt(0)
 	
 	#disable normals recalculation data
-	bs.seek(normalsRecalcOffsLocation)
-	bs.writeUInt(0)
+#	bs.seek(normalsRecalcOffsLocation)
+	#bs.writeUInt(0)
 	
 	#disable group pivots data
-	bs.seek(88)
-	bs.writeUInt(0)
+#	bs.seek(88)
+	#bs.writeUInt(0)
 	
 	#set numModels flag
 	doSetFlag = bSetNumModels or bDoVFX or (openOptionsDialog and openOptionsDialog.flag != -1)
 	if doSetFlag or bReWrite:
-		bs.seek(16)
+#		bs.seek(16)
 		if openOptionsDialog and openOptionsDialog.flag != -1:
 			bitFlag = openOptionsDialog.flag
 		else:
@@ -5333,21 +5347,21 @@ def meshWriteModel(mdl, bs):
 			if bDoSkin: 
 				bitFlag = bitFlag + 0x03
 		print("Flag: ", bitFlag)
-		bs.writeUByte(bitFlag)
+		#bs.writeUByte(bitFlag)
 	
 	#remove blendshapes offsets
-	bs.seek(bsHdrOffLocation)
-	bs.writeUInt(0)
-	bs.seek(bsIndicesOffLocation)
-	bs.writeUInt(0)
+#	bs.seek(bsHdrOffLocation)
+	#bs.writeUInt(0)
+#	bs.seek(bsIndicesOffLocation)
+	#bs.writeUInt(0)
 	
 	#Unknown
-	if sGameName == "DD2" and bDoSkin:
-		bs.seek(12)
-		bs.writeUInt(2303293740)
+#	if sGameName == "DD2" and bDoSkin:
+#		bs.seek(12)
+		#bs.writeUInt(2303293740)
 	
 	#fileSize
-	bs.seek(8)
-	bs.writeUInt(faceDataEnd) 
+#	bs.seek(8)
+	#bs.writeUInt(faceDataEnd) 
 	
 	return 1
